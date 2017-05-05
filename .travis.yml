@@ -19,6 +19,7 @@ script:
 
   # test
   - docker ps
-  - ./docker-check.sh php70-cli
-  - ./docker-check.sh php70-fpm
+  - docker run --rm lemonphp/php:7.0-cli-$COMMIT --version
+  - docker run --rm lemonphp/php:7.0-fpm-$COMMIT --version
   - docker run --rm lemonphp/php:composer-$COMMIT --version
+  - ./docker-check.sh php70-fpm

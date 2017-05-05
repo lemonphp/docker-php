@@ -1,5 +1,7 @@
 # Docker PHP images
 
+[![Build Status](https://travis-ci.org/lemonphp/docker-php.svg?branch=master)](https://travis-ci.org/lemonphp/docker-php)
+
 Some docker images for run PHP
 
 ## Requirement
