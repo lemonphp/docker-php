@@ -1,0 +1,24 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+script:
+  # build
+  - docker build -t lemonphp/php:7.0-cli-$COMMIT  cli/7.0
+  - docker build -t lemonphp/php:7.0-fpm-$COMMIT  fpm/7.0
+  - docker build -t lemonphp/php:composer-$COMMIT composer
+
+  # run
+  - docker run -d --name php70-cli      lemonphp/php:7.0-cli-$COMMIT
+  - docker run -d --name php70-fpm      lemonphp/php:7.0-fpm-$COMMIT
+
+  # test
+  - docker ps
+  - ./docker-check.sh php70-cli
+  - ./docker-check.sh php70-fpm
+  - docker run --rm lemonphp/php:composer-$COMMIT --version
